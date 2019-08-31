@@ -14,9 +14,18 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id', true);
+            // $table->integer('product_id')->unsigned()->index();
+            $table->unsignedBigInteger('product_id')->index(); //Laravel 5.8 by using unsignBigInteger cuz product_id is BigIncrements
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('customer');
+            $table->text('review');
+            $table->integer('star');
             $table->timestamps();
         });
+        // Schema::table('reviews', function($table) {
+        //     $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        // });
     }
 
     /**
