@@ -1,3 +1,17 @@
 php artisan make:model Model/Product -a
 php artisan make:model Model/Review -a
+
+====Database seeding with Faker Library====
 php artisan db:seed
+
+====Creating Relationship====
+php artisan tinker 
+{
+    App\Model\Product::find(4)
+    App\Model\Product::find(4)->reviews
+    App\Model\Review::find(4)->product
+}
+
+====Create API Resource/Transformer====
+php artisan make:resource Product/ProductCollection
+php artisan make:resource Product/ProductResource
